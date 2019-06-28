@@ -14,7 +14,7 @@ and administer [Suricata](https://suricata-ids.org/) intrusion detection system
 
 3) Build the project:
 
-```console
+```bash
 cd emitto/
 bazel build //...
 ```
@@ -40,8 +40,8 @@ Please read the Fleetspeak
 
 ##### Google Cloud Platform
 
-By default, Emitto uses [Cloud Storage](https://cloud.google.com/storage/) and
-[Cloud Filestore](https://cloud.google.com/filestore/) for object and rule file
+By default, Emitto uses [Google Cloud Datastore](https://cloud.google.com/datastore/)
+and [Google Cloud Storage](https://cloud.google.com/storage/) for object and rule file
 storage, respectively.
 
 ### Discussion & Announcements
