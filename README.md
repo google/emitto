@@ -14,7 +14,7 @@ and administer [Suricata](https://suricata-ids.org/) intrusion detection system
 
 3) Build the project:
 
-```console
+```bash
 cd emitto/
 bazel build //...
 ```
