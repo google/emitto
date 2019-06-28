@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["main.go"],
+    importpath = "github.com/google/emitto/source/server",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//source/filestore:go_default_library",
+        "//source/server/fleetspeak:go_default_library",
+        "//source/server/proto:go_default_library",
+        "//source/server/service:go_default_library",
+        "//source/server/store:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_github_google_fleetspeak//fleetspeak/src/server/grpcservice/proto/fleetspeak_grpcservice:go_default_library",
+        "@com_google_cloud_go//storage:go_default_library",
+        "@org_golang_google_grpc//:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "server",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)

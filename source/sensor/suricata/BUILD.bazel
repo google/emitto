@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["suricata.go"],
+    importpath = "github.com/google/emitto/source/sensor/suricata",
+    visibility = ["//visibility:public"],
+    deps = ["//source/sensor/suricata/socket:go_default_library"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["suricata_test.go"],
+    embed = [":go_default_library"],
+    deps = ["//source/sensor/suricata/socket:go_default_library"],
+)

@@ -1,0 +1,7 @@
+name: "Emitto"
+factory: "Socket"
+config {
+  [type.googleapis.com/fleetspeak.socketservice.Config] {
+    api_proxy_path: "/var/run/emitto.sock"
+  }
+}

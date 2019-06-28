@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "conversions.go",
+        "resources.go",
+    ],
+    importpath = "github.com/google/emitto/source/resources",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//source/sensor/proto:go_default_library",
+        "//source/server/proto:go_default_library",
+        "@com_github_fatih_camelcase//:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+    ],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["conversions_test.go"],
+    embed = [":go_default_library"],
+    deps = [
+        "//source/sensor/proto:go_default_library",
+        "//source/server/proto:go_default_library",
+        "@com_github_golang_protobuf//proto:go_default_library",
+        "@com_github_google_go_cmp//cmp:go_default_library",
+        "@io_bazel_rules_go//proto/wkt:timestamp_go_proto",
+    ],
+)

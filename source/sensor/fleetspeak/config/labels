@@ -1,0 +1,8 @@
+# Labels for Fleetspeak sensor clients.
+#
+# Primary identification label.
+emitto
+# Name of the location of the sensor.
+location-name-<name>
+# Zone of the specified location.
+location-zone-<zone>

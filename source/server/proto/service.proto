@@ -1,0 +1,132 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package emitto.service;
+
+import "google/protobuf/empty.proto";
+import "google/rpc/status.proto";
+import "google/protobuf/field_mask.proto";
+
+service Emitto {
+  // Deploys rules to the specified location.
+  rpc DeployRules(DeployRulesRequest) returns (stream DeployRulesResponse) {}
+  // Adds a new Rule.
+  rpc AddRule(AddRuleRequest) returns (google.protobuf.Empty) {}
+  // Modifies an existing Rule.
+  rpc ModifyRule(ModifyRuleRequest) returns (google.protobuf.Empty) {}
+  // Deletes an existing Rule.
+  rpc DeleteRule(DeleteRuleRequest) returns (google.protobuf.Empty) {}
+  // Lists Rules.
+  rpc ListRules(ListRulesRequest) returns (ListRulesResponse) {}
+  // Adds a new Location.
+  rpc AddLocation(AddLocationRequest) returns (google.protobuf.Empty) {}
+  // Modifies an existing Location.
+  rpc ModifyLocation(ModifyLocationRequest) returns (google.protobuf.Empty) {}
+  // Deletes an existing Location.
+  rpc DeleteLocation(DeleteLocationRequest) returns (google.protobuf.Empty) {}
+  // Lists all Locations.
+  rpc ListLocations(ListLocationsRequest) returns (ListLocationsResponse) {}
+}
+
+// Location defines an arbirary organization of sensors, segmented into a least
+// one zone.
+message Location {
+  // The unique name of the location, e.g. "company1".
+  string name = 1;
+  // The list of zones or "segments" to organize sensors, e.g. {"dmz", "prod"}.
+  repeated string zones = 2;
+}
+
+// Rule is an IDS rule, e.g. Snort or Suricata.
+message Rule {
+  // The unique rule ID.
+  int64 id = 1;
+  // The rule itself.
+  string body = 2;
+  // Select in which organization and zone the rule is enabled, e.g.
+  // "google:dmz".
+  repeated string location_zones = 3;
+}
+
+// Deploy rules to the sensors in a specific location.
+message DeployRulesRequest {
+  Location location = 1;
+}
+
+// Contains sensor client information for a deployment request.
+message DeployRulesResponse {
+  // ID of the client.
+  string client_id = 1;
+
+  // Fleetspeak message insertion status.
+  google.rpc.Status status = 3;
+}
+
+// Add a rule.
+message AddRuleRequest {
+  Rule rule = 1;
+}
+
+// Modify a rule.
+message ModifyRuleRequest {
+  // Rule to modify.
+  Rule rule = 1;
+
+  // Fields to be modified. Required.
+  google.protobuf.FieldMask field_mask = 2;
+}
+
+// Delete a rule by Rule ID.
+message DeleteRuleRequest {
+  int64 rule_id = 1;
+}
+
+// Lists Rules by ID.
+message ListRulesRequest {
+  repeated int64 rule_ids = 1;
+}
+
+// Contains the listed Rules.
+message ListRulesResponse {
+  repeated Rule rules = 1;
+}
+
+// Add a Location.
+message AddLocationRequest {
+  Location location = 1;
+}
+
+// Modify a Location by Location Name.
+message ModifyLocationRequest {
+  // Location to be modified.
+  Location location = 1;
+
+  // Fields to be modified. Required.
+  google.protobuf.FieldMask field_mask = 2;
+}
+
+// Delete a Location by Location Name.
+message DeleteLocationRequest {
+  string location_name = 1;
+}
+
+// Lists all Locations.
+message ListLocationsRequest {}
+
+// Contains all the listed Locations.
+message ListLocationsResponse {
+  repeated Location locations = 1;
+}

@@ -1,0 +1,211 @@
+// Copyright 2019 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package emitto.sensor;
+
+// EVE represents Suricata EVE json output.
+// http://suricata.readthedocs.io/en/latest/output/eve/eve-json-output.html (not
+// all structures are documented).
+message EVE {
+  string timestamp = 1;
+  string event_type = 2;
+  string src_ip = 3;
+  int32 src_port = 4;
+  string dest_ip = 5;
+  int32 dest_port = 6;
+  string proto = 7;
+  int32 pcap_cnt = 8;
+  string app_proto = 9;
+  string app_proto_tc = 10;
+  string app_proto_ts = 11;
+  int64 flow_id = 12;
+  int32 vlan = 13;
+  int32 tx_id = 14;
+  string packet = 15;
+  int32 icmp_type = 16;
+  int32 icmp_code = 17;
+  int32 response_icmp_code = 18;
+  int32 response_icmp_type = 19;
+  Vars vars = 20;
+  Alert alert = 21;
+  HTTP http = 22;
+  FileInfo fileinfo = 23;
+  TCP tcp = 24;
+  DNS dns = 25;
+  TLS tls = 26;
+  Flow flow = 27;
+  PacketInfo packet_info = 28;
+  SSH ssh = 29;
+  SMTP smtp = 30;
+  Email email = 31;
+}
+
+// Vars from the rule metadata field.
+message Vars {
+  map<string, bool> flowbits = 1;
+}
+
+// Alert EVE data.
+message Alert {
+  string action = 1;
+  int32 gid = 2;
+  int32 signature_id = 3;
+  int32 rev = 4;
+  string signature = 5;
+  string category = 6;
+  int32 severity = 7;
+  int32 tenant_id = 8;
+  Metadata metadata = 9;
+}
+
+// Metadata EVE data.
+message Metadata {
+  repeated string updated_at = 1;
+  repeated string created_at = 2;
+}
+
+// HTTP EVE data.
+message HTTP {
+  string hostname = 1;
+  string url = 2;
+  string http_user_agent = 3;
+  string http_content_type = 4;
+  string http_refer = 5;
+  string http_method = 6;
+  string protocol = 7;
+  int32 status = 8;
+  int32 length = 9;
+  string redirect = 10;
+  string xff = 11;
+  string http_request_body = 12;
+  string http_response_body = 13;
+  int32 http_port = 14;
+}
+
+// FileInfo EVE data.
+message FileInfo {
+  string filename = 1;
+  string state = 2;
+  bool stored = 3;
+  int32 size = 4;
+  int32 tx_id = 5;
+  bool gaps = 6;
+}
+
+// TCP EVE data.
+message TCP {
+  string tcp_flags = 1;
+  string tcp_flags_ts = 2;
+  string tcp_flags_tc = 3;
+  bool syn = 4;
+  bool rst = 5;
+  bool psh = 6;
+  bool ack = 7;
+  bool ecn = 8;
+  bool cwr = 9;
+  bool fin = 10;
+  bool urg = 11;
+  string state = 12;
+}
+
+// Flow EVE data.
+message Flow {
+  int32 pkts_toserver = 1;
+  int32 pkts_toclient = 2;
+  int32 bytes_toserver = 3;
+  int32 bytes_toclient = 4;
+  string start = 5;
+  string end = 6;
+  int32 age = 7;
+  string state = 8;
+  string reason = 9;
+  bool alerted = 10;
+}
+
+// DNS EVE data.
+message DNS {
+  string type = 1;
+  int32 id = 2;
+  string rrname = 3;
+  string rrtype = 4;
+  string rdata = 5;
+  string rcode = 8;
+  int32 ttl = 6;
+  int32 tx_id = 7;
+  bool aa = 9;
+  bool qr = 10;
+  bool rd = 11;
+  bool ra = 12;
+  string flags = 13;
+}
+
+// TLS EVE data.
+message TLS {
+  string subject = 1;
+  string issuerdn = 2;
+  bool session_resumed = 3;
+  string serial = 4;
+  string fingerprint = 5;
+  string sni = 6;
+  string version = 7;
+  string notbefore = 8;
+  string notafter = 9;
+  string certificate = 10;
+  string chain = 11;
+  JA3 ja3 = 12;
+}
+
+// JA3 TLS EVE data.
+message JA3 {
+  string hash = 1;
+  string data = 2;
+  string string = 3;
+}
+
+// PacketInfo EVE data.
+message PacketInfo {
+  int32 linktype = 1;
+}
+
+// SSH EVE data.
+message SSH {
+  Server server = 1;
+  Client client = 2;
+}
+
+// Client SSH EVE data.
+message Client {
+  string proto_version = 1;
+  string software_version = 2;
+}
+
+// Server SSH EVE data.
+message Server {
+  string proto_version = 1;
+  string software_version = 2;
+}
+
+// SMTP EVE data.
+message SMTP {
+  string helo = 1;
+  string mail_from = 2;
+  repeated string rcpt_to = 3;
+}
+
+// Email EVE data.
+message Email {
+  string status = 1;
+}

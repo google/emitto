@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "go_default_library",
+    srcs = ["main.go"],
+    importpath = "github.com/google/emitto/source/sensor",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//source/filestore:go_default_library",
+        "//source/sensor/client:go_default_library",
+        "@com_github_golang_glog//:go_default_library",
+        "@com_google_cloud_go//storage:go_default_library",
+    ],
+)
+
+go_binary(
+    name = "sensor",
+    embed = [":go_default_library"],
+    visibility = ["//visibility:public"],
+)

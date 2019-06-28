@@ -1,0 +1,27 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "emitto_sensor_proto",
+    srcs = ["sensor.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_google_protobuf//:timestamp_proto",
+        "@go_googleapis//google/rpc:status_proto",
+    ],
+)
+
+go_proto_library(
+    name = "emitto_sensor_go_proto",
+    importpath = "github.com/google/emitto/source/sensor/proto",
+    proto = ":emitto_sensor_proto",
+    visibility = ["//visibility:public"],
+    deps = ["@go_googleapis//google/rpc:status_go_proto"],
+)
+
+go_library(
+    name = "go_default_library",
+    embed = [":emitto_sensor_go_proto"],
+    importpath = "github.com/google/emitto/source/sensor/proto",
+    visibility = ["//visibility:public"],
+)
