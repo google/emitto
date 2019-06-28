@@ -44,7 +44,7 @@ By default, Emitto uses [Google Cloud Datastore](https://cloud.google.com/datast
 and [Google Cloud Storage](https://cloud.google.com/storage/) for object and rule file
 storage, respectively.
 
-### Discussion & Announcements
+### Discussions & Announcements
 
 The [Emitto](https://groups.google.com/forum/#!forum/emitto) Google Groups
 forum
