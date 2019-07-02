@@ -16,24 +16,24 @@
 package service
 
 import (
+	"context"
 	"fmt"
 	"time"
-	"context"
 
+	"github.com/golang/protobuf/ptypes"
 	"github.com/google/emitto/source/filestore"
 	"github.com/google/emitto/source/resources"
 	"github.com/google/emitto/source/server/fleetspeak"
 	"github.com/google/emitto/source/server/store"
-	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
 	log "github.com/golang/glog"
-	spb "github.com/google/emitto/source/sensor/proto"
-	svpb "github.com/google/emitto/source/server/proto"
 	emptypb "github.com/golang/protobuf/ptypes/empty"
 	tspb "github.com/golang/protobuf/ptypes/timestamp"
+	spb "github.com/google/emitto/source/sensor/proto"
+	svpb "github.com/google/emitto/source/server/proto"
 	fspb "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
 	fsspb "github.com/google/fleetspeak/fleetspeak/src/server/proto/fleetspeak_server"
 )

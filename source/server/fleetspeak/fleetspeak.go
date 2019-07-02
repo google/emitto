@@ -16,13 +16,13 @@
 package fleetspeak
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"math/rand"
 	"sort"
 	"strings"
 	"time"
-	"context"
 
 	"github.com/golang/protobuf/ptypes"
 	"github.com/google/fleetspeak/fleetspeak/src/common"

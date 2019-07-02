@@ -15,11 +15,11 @@
 package store
 
 import (
+	"context"
 	"log"
 	"reflect"
 	"strings"
 	"testing"
-	"context"
 	"time"
 
 	"github.com/google/emitto/source/resources"

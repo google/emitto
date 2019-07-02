@@ -15,17 +15,17 @@
 package store
 
 import (
+	"context"
 	"fmt"
 	"time"
-	"context"
 
-	"github.com/google/emitto/source/resources"
 	"cloud.google.com/go/datastore"
+	"github.com/google/emitto/source/resources"
 	"google.golang.org/api/option"
 )
 
 const (
-  datastoreAddr     = "dns:///datastore.googleapis.com:443"
+	datastoreAddr     = "dns:///datastore.googleapis.com:443"
 	locationKind      = "Location"
 	ruleKind          = "Rule"
 	sensorRequestKind = "SensorRequest"

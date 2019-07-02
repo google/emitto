@@ -20,9 +20,9 @@ import (
 	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
 
+	tpb "github.com/golang/protobuf/ptypes/timestamp"
 	spb "github.com/google/emitto/source/sensor/proto"
 	pb "github.com/google/emitto/source/server/proto"
-	tpb "github.com/golang/protobuf/ptypes/timestamp"
 )
 
 func TestProtoToLocation(t *testing.T) {

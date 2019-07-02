@@ -20,8 +20,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/google/emitto/source/resources"
 	"github.com/fatih/camelcase"
+	"github.com/google/emitto/source/resources"
 )
 
 // TimeNow is stubbed for testing.

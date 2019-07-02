@@ -15,11 +15,11 @@
 package store
 
 import (
+	"context"
 	"fmt"
 	"sort"
 	"sync"
 	"time"
-	"context"
 
 	"github.com/google/emitto/source/resources"
 )

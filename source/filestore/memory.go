@@ -15,9 +15,9 @@
 package filestore
 
 import (
+	"context"
 	"fmt"
 	"os"
-	"context"
 
 	"github.com/spf13/afero"
 	"google.golang.org/grpc/codes"

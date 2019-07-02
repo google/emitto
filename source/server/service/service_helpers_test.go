@@ -21,8 +21,8 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 
-	spb "github.com/google/emitto/source/server/proto"
 	tspb "github.com/golang/protobuf/ptypes/timestamp"
+	spb "github.com/google/emitto/source/server/proto"
 	fspb "github.com/google/fleetspeak/fleetspeak/src/common/proto/fleetspeak"
 	fsspb "github.com/google/fleetspeak/fleetspeak/src/server/proto/fleetspeak_server"
 	mpb "google.golang.org/genproto/protobuf/field_mask"

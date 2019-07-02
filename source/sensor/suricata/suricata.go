@@ -15,7 +15,9 @@
 // Package suricata contains functionality to control and monitor Suricata.
 package suricata
 
-import "github.com/google/emitto/source/sensor/suricata/socket"
+import (
+	"github.com/google/emitto/source/sensor/suricata/socket"
+)
 
 // Socket represents a Suricata unix socket connection.
 type Socket interface {

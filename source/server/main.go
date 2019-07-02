@@ -16,25 +16,21 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"net"
-	"context"
 
+	"cloud.google.com/go/storage"
 	"github.com/google/emitto/source/filestore"
 	"github.com/google/emitto/source/server/fleetspeak"
 	"github.com/google/emitto/source/server/service"
 	"github.com/google/emitto/source/server/store"
-	"cloud.google.com/go/storage"
 	"google.golang.org/grpc"
 
 	log "github.com/golang/glog"
 	pb "github.com/google/emitto/source/server/proto"
 	fspb "github.com/google/fleetspeak/fleetspeak/src/server/grpcservice/proto/fleetspeak_grpcservice"
-)
-
-const (
-	serverType = "ids-manager"
 )
 
 var (

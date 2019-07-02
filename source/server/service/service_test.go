@@ -15,18 +15,18 @@
 package service
 
 import (
+	"context"
 	"errors"
 	"io"
 	"net"
 	"testing"
 	"time"
-	"context"
 
+	"github.com/golang/protobuf/proto"
 	"github.com/google/emitto/source/filestore"
 	"github.com/google/emitto/source/resources"
 	"github.com/google/emitto/source/server/fleetspeak"
 	"github.com/google/emitto/source/server/store"
-	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"

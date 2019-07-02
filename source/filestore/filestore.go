@@ -15,7 +15,9 @@
 // Package filestore contains functionality to store Emitto rule files.
 package filestore
 
-import "context"
+import (
+	"context"
+)
 
 // FileStore represents a Emitto file store.
 type FileStore interface {

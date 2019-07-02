@@ -15,12 +15,12 @@
 package filestore
 
 import (
+	"context"
 	"errors"
 	"path/filepath"
 	"reflect"
 	"strings"
 	"testing"
-	"context"
 
 	"github.com/google/go-cmp/cmp"
 

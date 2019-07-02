@@ -15,10 +15,10 @@
 package client
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"testing"
-	"context"
 
 	"github.com/golang/protobuf/proto"
 	"github.com/google/go-cmp/cmp"

@@ -14,7 +14,9 @@
 
 package filestore
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestMemoryFileStore(t *testing.T) {
 	RunTestSuite(t, func() FileStore { return NewMemoryFileStore() })
