@@ -49,28 +49,31 @@ type Client struct {
 
 // New creates a new Client.
 func New(addr, certFile string) (*Client, error) {
-	var (
-		conn *grpc.ClientConn
-		err  error
-	)
-	switch {
-	case certFile != "":
+	var client *Client
+	if certFile != "" {
 		cred, err := credentials.NewClientTLSFromFile(certFile, "")
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to retrieve certificate from (%q): %v", certFile, err)
 		}
-		conn, err = grpc.Dial(addr, grpc.WithTransportCredentials(cred))
-	default:
-		conn, err = grpc.Dial(addr, grpc.WithInsecure())
+		conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(cred))
+		if err != nil {
+			return nil, fmt.Errorf("unable to connect to Fleetspeak admin interface [%s] with credentials (%q): %v", addr, certFile, err)
+		}
+		client = &Client{
+			admin: fsspb.NewAdminClient(conn),
+			conn:  conn,
+		}
+	} else {
+		conn, err := grpc.Dial(addr, grpc.WithInsecure())
+		if err != nil {
+			return nil, fmt.Errorf("unable to connect to Fleetspeak admin interface [%s]: %v", addr, err)
+		}
+		client = &Client{
+			admin: fsspb.NewAdminClient(conn),
+			conn:  conn,
+		}
 	}
-	if err != nil {
-		return nil, fmt.Errorf("unable to connect to Fleetspeak admin interface [%s]: %v", addr, err)
-	}
-
-	return &Client{
-		admin: fsspb.NewAdminClient(conn),
-		conn:  conn,
-	}, nil
+	return client, nil
 }
 
 // Close terminates the Fleetspeak admin connection.
