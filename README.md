@@ -1,5 +1,7 @@
 # Emitto
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/google/emitto)](https://goreportcard.com/report/github.com/google/emitto)
+
 ### About
 
 Emitto is a service which provides a robust and targeted way to manage, store,

@@ -17,19 +17,19 @@ package client
 
 import (
 	"bufio"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"time"
-	"context"
 
+	"github.com/golang/protobuf/ptypes"
 	"github.com/google/emitto/source/filestore"
 	"github.com/google/emitto/source/sensor/fleetspeak"
 	"github.com/google/emitto/source/sensor/host"
 	"github.com/google/emitto/source/sensor/suricata"
-	"github.com/golang/protobuf/ptypes"
 	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

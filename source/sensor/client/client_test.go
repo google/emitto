@@ -23,8 +23,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/google/emitto/source/sensor/host"
 	"github.com/golang/protobuf/proto"
+	"github.com/google/emitto/source/sensor/host"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

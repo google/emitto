@@ -16,13 +16,13 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"time"
-	"context"
 
+	"cloud.google.com/go/storage"
 	"github.com/google/emitto/source/filestore"
 	"github.com/google/emitto/source/sensor/client"
-	"cloud.google.com/go/storage"
 
 	log "github.com/golang/glog"
 )
