@@ -1,0 +1,15 @@
+# Test settings according to: https://github.com/bazelbuild/rules_go#how-do-i-run-bazel-on-travis-ci
+startup --host_jvm_args=-Xmx2500m
+startup --host_jvm_args=-Xms2500m
+startup --batch
+
+--local_resources=1536,1.5,0.5
+--noshow_progress
+--noshow_loading_progress
+
+build --spawn_strategy=standalone --genrule_strategy=standalone
+build --verbose_failures
+
+test --test_strategy=standalone
+test --ram_utilization_factor=10
+test --test_output=errors
