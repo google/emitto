@@ -1,5 +1,6 @@
 # Emitto
 
+[![Travis Build Status](https://api.travis-ci.org/google/emitto.svg?branch=master)](https://travis-ci.org/google/emitto)
 [![Go Report Card](https://goreportcard.com/badge/github.com/google/emitto)](https://goreportcard.com/report/github.com/google/emitto)
 
 ### About

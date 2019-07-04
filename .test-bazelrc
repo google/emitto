@@ -1,8 +1,7 @@
 # Test settings according to: https://github.com/bazelbuild/rules_go#how-do-i-run-bazel-on-travis-ci
-# Most of these settings are to limit resource consumption and log clutter.
+# These settings limit resource consumption and log clutter.
 startup --host_jvm_args=-Xmx2500m
 startup --host_jvm_args=-Xms2500m
-startup --batch
 
 --local_resources=1536,1.5,0.5
 --noshow_progress
