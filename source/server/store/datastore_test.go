@@ -31,7 +31,7 @@ import (
 // This test relies on the Google Cloud Datastore emulator with the following configuration
 // constants:
 const (
-	testHost    = "127.0.0.1:9999"
+	testHost    = "localhost:9999"
 	testProject = "test-project-name"
 )
 
