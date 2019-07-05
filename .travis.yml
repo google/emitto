@@ -9,8 +9,13 @@ addons:
       - pkg-config
 
 before_install:
-  - sudo apt-get install google-cloud-sdk-datastore-emulator
+  # Install gcloud & start datastore emulator:
+  - export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+  - echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+  - curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  - sudo apt-get update && sudo apt-get install google-cloud-sdk
   - gcloud beta emulators datastore start --no-legacy --project test-project-name --host-port localhost:9999 --no-store-on-disk --consistency=1
+  # Install Bazel:
   - wget https://github.com/bazelbuild/bazel/releases/download/0.27.1/bazel_0.27.1-linux-x86_64.deb
   - echo "10b4dc5dd25b6372e03553713a29705afef9e03a6e1169983e77c69b2ca993ed  bazel_0.27.1-linux-x86_64.deb" | sha256sum -c
   - sudo dpkg -i bazel_0.27.1-linux-x86_64.deb
