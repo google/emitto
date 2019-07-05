@@ -7,8 +7,10 @@ addons:
     packages:
       - wget
       - pkg-config
+      - google-cloud-sdk
 
 before_install:
+  - gcloud beta emulators datastore start --no-legacy --project test-project-name --host-port localhost:9999 --no-store-on-disk --consistency=1 &
   - wget https://github.com/bazelbuild/bazel/releases/download/0.27.1/bazel_0.27.1-linux-x86_64.deb
   - echo "10b4dc5dd25b6372e03553713a29705afef9e03a6e1169983e77c69b2ca993ed  bazel_0.27.1-linux-x86_64.deb" | sha256sum -c
   - sudo dpkg -i bazel_0.27.1-linux-x86_64.deb
