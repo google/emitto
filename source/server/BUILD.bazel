@@ -23,3 +23,21 @@ go_binary(
     embed = [":go_default_library"],
     visibility = ["//visibility:public"],
 )
+
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+
+go_image(
+    name = "server_image_base",
+    embed = [":go_default_library"],
+)
+
+load("@io_bazel_rules_docker//container:container.bzl", "container_image")
+
+container_image(
+    name = "server_image",
+    base = ":server_image_base",
+    ports = ["4444"],
+    workdir = "/server",
+    cmd = ["/server", "--memory_storage=true"],
+    stamp = True,
+)

@@ -63,14 +63,14 @@ func main() {
 	s, closeStore := mustGetStore(ctx)
 	defer closeStore()
 
-	server := grpc.NewServer(nil)
+	server := grpc.NewServer()
 	svc := service.New(s, fs, a)
 	pb.RegisterEmittoServer(server, svc)
 	fspb.RegisterProcessorServer(server, svc)
 
 	l, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
 	if err != nil {
-		log.Fatalf("server failed to listen: %v", err)
+		log.Exitf("server failed to listen: %v", err)
 	}
 	defer l.Close()
 	server.Serve(l)
@@ -82,7 +82,7 @@ func mustGetFileStore(ctx context.Context) (filestore.FileStore, func() error) {
 	}
 	c, err := filestore.NewGCSClient(ctx, *credFile, []string{storage.ScopeFullControl})
 	if err != nil {
-		log.Fatalf("failed to create Google Cloud Storage client: %v", err)
+		log.Exitf("failed to create Google Cloud Storage client: %v", err)
 	}
 	return filestore.NewGCSFileStore(*storageBucket, c), c.Close
 }
@@ -93,7 +93,7 @@ func mustGetStore(ctx context.Context) (store.Store, func() error) {
 	}
 	c, err := store.NewGCDClient(ctx, *projectID, *credFile)
 	if err != nil {
-		log.Fatalf("failed to create Google Cloud Datastore client: %v", err)
+		log.Exitf("failed to create Google Cloud Datastore client: %v", err)
 	}
 	return store.NewDataStore(c), c.Close
 }

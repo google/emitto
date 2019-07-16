@@ -22,6 +22,24 @@ cd emitto/
 bazel build //...
 ```
 
+### Docker
+
+Both the sever and sensor client can be built with the Bazel Docker rules located in their respective BUILD files.
+
+For example, to build and run the sensor client locally in Docker:
+
+```bash
+bazel --bazelrc=.bazelrc build --platforms=@io_bazel_rules_go//go/toolchain:linux_amd64 source/sensor:sensor_image.tar
+docker load -i bazel-bin/source/sensor/sensor_image.tar
+docker run bazel/source/sensor:sensor_image
+```
+
+The current build `go_image` rules use a [distroless](https://github.com/GoogleContainerTools/distroless)
+runtime base image, and the images will run using the default Go binary flags.
+
+Bazel supports the ability to push an image to a remote repository, and also to pull a remote image to be
+used as a custom base dependency. More information about Bazel Docker rules can be found [here](https://github.com/bazelbuild/rules_docker).
+
 ### Prerequisites
 
 The following services and products must be established and configured before
