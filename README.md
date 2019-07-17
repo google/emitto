@@ -34,8 +34,8 @@ docker load -i bazel-bin/source/sensor/sensor_image.tar
 docker run bazel/source/sensor:sensor_image
 ```
 
-The current build `go_image` rules use a [distroless](https://github.com/GoogleContainerTools/distroless)
-runtime base image, and the images will run using the default Go binary flags.
+The current `go_image` rule uses a [distroless](https://github.com/GoogleContainerTools/distroless)
+runtime base image, and will run using the default Go binary flag values. The `container_image` rule can be extended to support a custom `env` and other image attributes.
 
 Bazel supports the ability to push an image to a remote repository, and also to pull a remote image to be
 used as a custom base dependency. More information about Bazel Docker rules can be found [here](https://github.com/bazelbuild/rules_docker).
