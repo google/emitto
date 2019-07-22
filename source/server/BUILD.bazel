@@ -37,7 +37,5 @@ container_image(
     name = "server_image",
     base = ":server_image_base",
     ports = ["4444"],
-    workdir = "/server",
-    cmd = ["/server", "--memory_storage=true"],
     stamp = True,
 )
